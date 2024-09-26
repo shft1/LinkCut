@@ -14,7 +14,7 @@ class LinkForm(FlaskForm):
     custom_id = StringField(
         'Ваш вариант короткой ссылки',
         validators=[
-            Length(6, 16, message='ID ссылки не в диапазоне от 6-16 символов!'),
+            Length(6, 16, message='ID ссылки не в диапазоне от 6-16 символов'),
             Optional(),
         ]
     )
