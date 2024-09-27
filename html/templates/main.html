@@ -58,7 +58,7 @@
                 {% for category, message in messages %}
                   <h5 class="text-center">{{ message }}</h5>
                   {% if category == 'inf' %}
-                    <a class="text-center" href="{{ url_for('redirect_view', short_id=object.short, _external=True) }}">
+                    <a href="{{ url_for('redirect_view', short_id=object.short, _external=True) }}">
                       {{ url_for('redirect_view', short_id=object.short, _external=True) }}
                     </a>
                   {% endif %}
