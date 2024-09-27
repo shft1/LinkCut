@@ -40,6 +40,6 @@ def index():
     return render_template('main.html', form=form)
 
 
-@app.route('/<string:short_id>')
+@app.route('/<string:short_id>/')
 def redirect_view(short_id):
     return redirect(URLMap.query.filter_by(short=short_id).first().original)
