@@ -1,6 +1,6 @@
 import random
 
-from flask import flash, render_template
+from flask import flash, redirect, render_template
 
 from . import app, db
 from .forms import LinkForm
@@ -42,4 +42,4 @@ def index():
 
 @app.route('/<string:short_id>')
 def redirect_view(short_id):
-    return 'Привет редирект!'
+    return redirect(URLMap.query.filter_by(short=short_id).first().original)
