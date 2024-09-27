@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, URLField
-from wtforms.validators import URL, DataRequired, Length, Optional
+from wtforms.validators import URL, DataRequired, Optional, Regexp
+
+pattern = r'^[\dA-Za-z]{1,16}$'
 
 
 class LinkForm(FlaskForm):
@@ -14,7 +16,10 @@ class LinkForm(FlaskForm):
     custom_id = StringField(
         'Ваш вариант короткой ссылки',
         validators=[
-            Length(6, 16, message='ID ссылки не в диапазоне от 6-16 символов'),
+            Regexp(
+                pattern,
+                message='Указано недопустимое имя для короткой ссылки'
+            ),
             Optional(),
         ]
     )

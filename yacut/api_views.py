@@ -1,7 +1,10 @@
+import re
+
 from flask import jsonify, request
 
 from . import app, db
 from .error_handlers import InvalidAPIUsage
+from .forms import pattern
 from .models import URLMap
 from .views import get_unique_short_id
 
@@ -13,7 +16,7 @@ def create_url_map():
         raise InvalidAPIUsage('Отсутствует тело запроса')
     if 'url' not in data:
         raise InvalidAPIUsage('"url" является обязательным полем!')
-    if 'custom_id' in data and not (6 <= len(data['custom_id']) <= 16):
+    if 'custom_id' in data and re.search(pattern, data['custom_id']) is None:
         raise InvalidAPIUsage('Указано недопустимое имя для короткой ссылки')
     if 'custom_id' not in data:
         data['custom_id'] = get_unique_short_id()
