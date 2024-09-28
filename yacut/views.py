@@ -26,7 +26,7 @@ def index():
             flash('Предложенный вариант короткой ссылки уже существует.',
                   'err')
             return render_template('main.html', form=form)
-        if custom_id == '':
+        if custom_id in ['', None]:
             custom_id = get_unique_short_id()
         url_map = URLMap(
             original=form.original_link.data,

@@ -12,11 +12,11 @@ class URLMap(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.now)
 
     def from_dict(self, data):
-        values = list(data.values())
-        i = 0
-        for field in ['original', 'short']:
-            setattr(self, field, values[i])
-            i += 1
+        for field, value in [
+            ('original', data['url']),
+            ('short', data['custom_id'])
+        ]:
+            setattr(self, field, value)
 
     def to_dict(self):
         return dict(

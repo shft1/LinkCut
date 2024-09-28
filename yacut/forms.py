@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, URLField
 from wtforms.validators import URL, DataRequired, Optional, Regexp
 
-pattern = r'^[\dA-Za-z]{1,16}$'
+pattern = r'^[\dA-Za-z]{0,16}$'
 
 
 class LinkForm(FlaskForm):
