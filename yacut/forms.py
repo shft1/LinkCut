@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, URLField
 from wtforms.validators import URL, DataRequired, Optional, Regexp
 
-pattern = r'^[\dA-Za-z]{0,16}$'
+from services.constants import PATTERN
 
 
 class LinkForm(FlaskForm):
@@ -17,7 +17,7 @@ class LinkForm(FlaskForm):
         'Ваш вариант короткой ссылки',
         validators=[
             Regexp(
-                pattern,
+                PATTERN,
                 message='Указано недопустимое имя для короткой ссылки'
             ),
             Optional(),
