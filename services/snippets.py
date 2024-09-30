@@ -1,7 +1,7 @@
 import random
 
 from services.constants import LEN_ID
-from services.validators import DataValidator
+from services.validators import validate_unique_short
 
 
 def get_short_id():
@@ -15,6 +15,6 @@ def get_short_id():
 def get_unique_short_id(short_id):
     if short_id in set(['', None]):
         short_id = get_short_id()
-        while DataValidator.validate_unique_short(short_id):
+        while validate_unique_short(short_id):
             short_id = get_short_id()
     return short_id

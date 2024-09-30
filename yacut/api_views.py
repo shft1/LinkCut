@@ -3,7 +3,7 @@ from http import HTTPStatus
 from flask import jsonify, request
 
 from services.snippets import get_unique_short_id
-from services.validators import DataValidator
+from services.validators import validate_data, validate_long, validate_short
 
 from . import app, db
 from .error_handlers import InvalidAPIUsage
@@ -12,10 +12,10 @@ from .models import URLMap
 
 @app.route('/api/id/', methods=['POST'])
 def create_url_map():
-    data = DataValidator.validate_data(request.get_json(silent=True))
-    DataValidator.validate_long(data.get('url'))
+    data = validate_data(request.get_json(silent=True))
+    validate_long(data.get('url'))
     short_id = get_unique_short_id(data.get('custom_id'))
-    DataValidator.validate_short(short_id)
+    validate_short(short_id)
     data['custom_id'] = short_id
     url_map = URLMap()
     url_map.from_dict(data)
